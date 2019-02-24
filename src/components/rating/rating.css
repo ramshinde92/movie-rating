@@ -1,0 +1,25 @@
+.rating {
+  padding: 0;
+  margin: 0;
+}
+
+.rating-list-item {
+  list-style: none;
+  display: inline-block;
+}
+
+.rating-star {
+  padding: 3px;
+  vertical-align: middle;
+  line-height: 1;
+  color: #666;
+  transition: color 0.2s ease-out;
+}
+
+.rating-star:hover {
+  cursor: pointer;
+}
+
+.rating-star.hovered {
+  color: #ff9900;
+}
