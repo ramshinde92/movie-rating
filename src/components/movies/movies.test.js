@@ -2,6 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import Movies from "./movies";
 import * as movieService from "../../services/fakeMovieService";
+import * as randomService from "../../services/randomNumberService";
 import Rating from "../rating/rating";
 
 it("should not render if service does not return list", () => {
@@ -85,5 +86,56 @@ describe("Movies Component", () => {
 
       expect(moviesComponent.state().movies[0].title).toEqual("Die Hard");
     });
+  });
+});
+
+describe("random rating", () => {
+  let moviesComponent;
+  jest.useFakeTimers();
+
+  const movies = [
+    {
+      _id: "5b21ca3eeb7f6fbccd471815",
+      title: "Terminator",
+      genre: { _id: "5b21ca3eeb7f6fbccd471818", name: "Action" },
+      rating: 0
+    },
+    {
+      _id: "5b21ca3eeb7f6fbccd471816",
+      title: "Die Hard",
+      genre: { _id: "5b21ca3eeb7f6fbccd471818", name: "Action" },
+      rating: 0
+    },
+    {
+      _id: "5b21ca3eeb7f6fbccd47181e",
+      title: "Gone Girl",
+      genre: { _id: "5b21ca3eeb7f6fbccd471820", name: "Thriller" },
+      rating: 0
+    }
+  ];
+
+  beforeEach(() => {
+    moviesComponent = shallow(<Movies />);
+    moviesComponent.getMovies = jest.fn(() => movies);
+    moviesComponent.instance().componentDidMount();
+    randomService.getRandomExclusive = jest.fn().mockReturnValue(1);
+    randomService.getRandomInclusive = jest.fn().mockReturnValue(3);
+    moviesComponent.find(".btn").simulate("click");
+    jest.advanceTimersByTime(2000);
+  });
+
+  it("should call setInterval on click", () => {
+    expect(setInterval).toHaveBeenCalled();
+  });
+
+  it("should randomize the list on click", () => {
+    expect(moviesComponent.state().movies[0].title).toEqual("Die Hard");
+    expect(moviesComponent.state().movies[0].rating).toEqual(3);
+    expect(moviesComponent.instance().timer).toEqual(2);
+  });
+
+  it("should stop randomizing the list on click", () => {
+    moviesComponent.find(".btn").simulate("click");
+    expect(moviesComponent.instance().timer).toEqual(null);
   });
 });

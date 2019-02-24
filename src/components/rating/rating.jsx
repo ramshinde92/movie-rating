@@ -1,8 +1,20 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
-class Rating extends Component {
-  state = { rating: this.props.rating || null, tempRating: null };
+class Rating extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      rating: this.props.rating || null,
+      tempRating: null
+    };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    return {
+      rating: props.rating && props.rating !== 0 ? props.rating : state.rating
+    };
+  }
 
   rate(index) {
     this.rateIn(index);
@@ -58,10 +70,9 @@ class Rating extends Component {
   }
 }
 
-//TODO: Add proptypes
-
 Rating.propTypes = {
-  setRating: PropTypes.func.isRequired
+  setRating: PropTypes.func.isRequired,
+  rating: PropTypes.number
 };
 
 export default Rating;
