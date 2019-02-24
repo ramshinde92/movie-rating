@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { getMovies } from "../services/fakeMovieService";
+import { getMovies } from "../../services/fakeMovieService";
+import Rating from "../rating/rating";
 
 class Movies extends Component {
   state = {
@@ -11,6 +12,18 @@ class Movies extends Component {
     const movies = getMovies();
 
     this.setState({ movies });
+  }
+
+  setRating(movie, rating) {
+    const movies = [...this.state.movies];
+    const index = movies.findIndex(item => item._id === movie._id);
+    movies[index] = { ...movies[index], rating: rating };
+
+    const sortedMovies = movies.sort((a, b) => b.rating - a.rating);
+
+    this.setState({
+      movies: sortedMovies
+    });
   }
 
   render() {
@@ -25,7 +38,8 @@ class Movies extends Component {
                 <tr>
                   <th>Title</th>
                   <th>Genre</th>
-                  <th>Rate</th>
+                  {/* TODO: Sort based on Rating, give user option to sort */}
+                  <th>Rating</th>
                 </tr>
               </thead>
               <tbody>
@@ -34,7 +48,12 @@ class Movies extends Component {
                     <tr key={movie._id}>
                       <td>{movie.title}</td>
                       <td>{movie.genre.name}</td>
-                      <td>{movie.rating}</td>
+                      <td>
+                        <Rating
+                          rating={movie.rating}
+                          setRating={rating => this.setRating(movie, rating)}
+                        />
+                      </td>
                     </tr>
                   );
                 })}
