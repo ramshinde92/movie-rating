@@ -1,8 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
 import Movies from "./movies";
-import * as movieService from "../services/fakeMovieService";
-import Rating from "./rating/rating";
+import * as movieService from "../../services/fakeMovieService";
+import Rating from "../rating/rating";
 
 it("should not render if service does not return list", () => {
   const moviesComponent = shallow(<Movies />);
