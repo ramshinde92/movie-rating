@@ -57,4 +57,13 @@ describe("rating component => ", () => {
         .hasClass("hovered")
     ).toBeTruthy();
   });
+
+  it("should update rating when passed as prop from parent", () => {
+    const ratingComponent = shallow(<Rating setRating={dummysetRating} />);
+    ratingComponent.setProps({
+      rating: 1
+    });
+    const first = ratingComponent.find(".rating-star").at(0);
+    expect(first.hasClass("hovered")).toEqual(true);
+  });
 });
