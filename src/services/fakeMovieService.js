@@ -45,7 +45,7 @@ const movies = [
     _id: "5b21ca3eeb7f6fbccd47181f",
     title: "The Sixth Sense",
     genre: { _id: "5b21ca3eeb7f6fbccd471820", name: "Thriller" },
-    rating: 0
+    rating: 3
   },
   {
     _id: "5b21ca3eeb7f6fbccd471821",
@@ -57,7 +57,7 @@ const movies = [
     _id: "5b21ca3eeb7f6fbccd47181g",
     title: "Inception",
     genre: { _id: "5b21ca3eeb7f6fbccd471826", name: "Sci-fi" },
-    rating: 0
+    rating: 1
   },
   {
     _id: "5b21ca3eeb7f6fbccd471825",
