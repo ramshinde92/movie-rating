@@ -11,14 +11,16 @@ class Movies extends Component {
     super(props);
 
     this.state = {
-      movies: []
+      movies: [],
+      randomBtnClicked: false
     };
 
     this.timer = null;
   }
 
   componentDidMount() {
-    const movies = getMovies();
+    let movies = getMovies();
+    movies = movies.sort((a, b) => b.rating - a.rating);
 
     this.setState({ movies });
   }
@@ -48,6 +50,10 @@ class Movies extends Component {
     } else {
       this.stopRandomizing();
     }
+
+    this.setState({
+      randomBtnClicked: this.timer ? true : false
+    });
   }
 
   stopRandomizing() {
@@ -56,14 +62,16 @@ class Movies extends Component {
   }
 
   render() {
-    const { movies } = this.state;
+    const { movies, randomBtnClicked } = this.state;
+    const modifier = randomBtnClicked ? "dark" : "info";
+    const btnText = randomBtnClicked ? "Stop" : "Start";
 
     return (
       <div className="row">
         <div className="col">
-          {this.state.movies.length ? (
+          {movies.length ? (
             <Fragment>
-              <table className="table table-dark table-striped table-hover">
+              <table className="table table-dark table-striped table-hover mt-4">
                 <thead>
                   <tr>
                     <th>Title</th>
@@ -90,10 +98,10 @@ class Movies extends Component {
               </table>
               <p>
                 <button
-                  className="btn btn-primary mr-2"
+                  className={`btn btn-outline-${modifier} mr-2`}
                   onClick={() => this.randomize()}
                 >
-                  Toggle Random Rating
+                  {btnText} Random Rating
                 </button>
               </p>
             </Fragment>
