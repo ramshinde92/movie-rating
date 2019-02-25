@@ -13,8 +13,6 @@ it("should not render if service does not return list", () => {
 });
 
 describe("Movies Component", () => {
-  // TODO: Add service code in beforeEach
-  // TODO: Add test to check if correct values are passed to children of table or snapshot
   it("should render movies component", () => {
     const moviesComponent = shallow(<Movies />);
     expect(moviesComponent.find(".row")).toBeDefined();

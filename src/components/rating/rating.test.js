@@ -3,7 +3,6 @@ import Rating from "./rating";
 import { shallow } from "enzyme";
 
 describe("rating component => ", () => {
-  //TODO: cover tempRating
   const dummysetRating = jest.fn();
   it("should render rating component", () => {
     const ratingComponent = shallow(<Rating setRating={dummysetRating} />);

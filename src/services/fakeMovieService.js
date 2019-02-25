@@ -1,4 +1,3 @@
-// TODO: Add more movies
 const movies = [
   {
     _id: "5b21ca3eeb7f6fbccd471815",
@@ -68,7 +67,6 @@ const movies = [
   }
 ];
 
-//TODO: Make this function as promise
 export function getMovies() {
   return movies;
 }

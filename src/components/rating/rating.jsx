@@ -5,8 +5,7 @@ class Rating extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      rating: this.props.rating || null,
-      tempRating: null
+      rating: this.props.rating || null
     };
   }
 
@@ -23,17 +22,15 @@ class Rating extends PureComponent {
   }
 
   rateIn(index) {
-    const temp = this.state.rating;
     const rating = index;
 
     this.setState({
-      rating,
-      tempRating: temp
+      rating
     });
   }
 
   rateOut() {
-    this.setState({ rating: this.state.tempRating });
+    this.setState({ rating: null });
   }
 
   getStars() {

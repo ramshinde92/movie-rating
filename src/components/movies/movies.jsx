@@ -68,7 +68,6 @@ class Movies extends Component {
                   <tr>
                     <th>Title</th>
                     <th>Genre</th>
-                    {/* TODO: Sort based on Rating, give user option to sort */}
                     <th>Rating</th>
                   </tr>
                 </thead>
