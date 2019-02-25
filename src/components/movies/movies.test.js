@@ -13,8 +13,6 @@ it("should not render if service does not return list", () => {
 });
 
 describe("Movies Component", () => {
-  // TODO: Add service code in beforeEach
-  // TODO: Add test to check if correct values are passed to children of table or snapshot
   it("should render movies component", () => {
     const moviesComponent = shallow(<Movies />);
     expect(moviesComponent.find(".row")).toBeDefined();
@@ -137,5 +135,20 @@ describe("random rating", () => {
   it("should stop randomizing the list on click", () => {
     moviesComponent.find(".btn").simulate("click");
     expect(moviesComponent.instance().timer).toEqual(null);
+  });
+
+  it("should update button click and button text on click", () => {
+    expect(
+      moviesComponent.find(".btn").hasClass("btn-outline-dark")
+    ).toBeTruthy();
+    expect(moviesComponent.find(".btn").text()).toEqual("Stop Random Rating");
+  });
+
+  it("should update button click and button text on click", () => {
+    moviesComponent.find(".btn").simulate("click");
+    expect(
+      moviesComponent.find(".btn").hasClass("btn-outline-info")
+    ).toBeTruthy();
+    expect(moviesComponent.find(".btn").text()).toEqual("Start Random Rating");
   });
 });

@@ -1,4 +1,3 @@
-// TODO: Add more movies
 const movies = [
   {
     _id: "5b21ca3eeb7f6fbccd471815",
@@ -22,7 +21,7 @@ const movies = [
     _id: "5b21ca3eeb7f6fbccd471819",
     title: "Trip to Italy",
     genre: { _id: "5b21ca3eeb7f6fbccd471814", name: "Comedy" },
-    rating: 0
+    rating: 2
   },
   {
     _id: "5b21ca3eeb7f6fbccd47181a",
@@ -68,7 +67,6 @@ const movies = [
   }
 ];
 
-//TODO: Make this function as promise
 export function getMovies() {
   return movies;
 }
